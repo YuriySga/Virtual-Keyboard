@@ -1,3 +1,12 @@
+let lang = 'ENG';
+let shiftCase = false;
+let shiftCaseLeft = false;
+let altCaseLeft = false;
+let changeLangUpKeyFlag = false;
+let capsLock = false;
+
+const textin = document.querySelector('.textin');
+
 const tilde = document.querySelector('.tilde');
 const one = document.querySelector('.one');
 const two = document.querySelector('.two');
@@ -63,63 +72,60 @@ const arrowLeft = document.querySelector('.arrowLeft');
 const arrowDown = document.querySelector('.arrowDown');
 const arrowRight = document.querySelector('.arrowRight');
 
-
-
-
-
 const obj = {
-  Backquote: [tilde, "~", "`"],  
-  Digit1: [one, '1', '!'],
-  Digit2: [two,'2','@'],
-  Digit3: [three,'3','#'],
-  Digit4: [four,'4',"$"],
-  Digit5: [five,'5','%'],
-  Digit6: [six,'6','^'],
-  Digit7: [seven,'7','&'],
-  Digit8: [eight,'8','*'],
-  Digit9: [nine,'9','('],
-  Digit0: [zero,'0',')'],
-  Minus: [minus,'-','_'],
-  Equal: [equal,'=','+'],  
-  KeyQ: [q,'q','Q'],
-  KeyW: [w,'w','W'],
-  KeyE: [e,'e','E'],
-  KeyR: [r,'r','R'],
-  KeyT: [t,'t','T'],
-  KeyY: [y,'y','Y'],
-  KeyU: [u,'u','U'],
-  KeyI: [i,'i','I'],
-  KeyO: [o,'o','O'],
-  KeyP: [p,'p','P'],
-  BracketLeft:[ha,'[','{'],
-  BracketRight: [strongSign,']','}'],
-  Backslash: [slash,'\\','|'],  
-  KeyA: [a,'a','A'],
-  KeyS: [s,'s','S'],
-  KeyD: [d,'d','D'],
-  KeyF: [f,'f','F'],
-  KeyG: [g,'g','G'],
-  KeyH: [h,'h','H'],
-  KeyJ: [j,'j','J'],
-  KeyK: [k,'k','K'],
-  KeyL: [l,'l','L'],
-  Semicolon: [colon,';',':'],
-  Quote: [quotationMarks,"'",'"'], 
-  KeyZ: [z,'z','Z'],
-  KeyX: [x,'x','X'],
-  KeyC: [c,'c','C'],
-  KeyV: [v,'v','V'],
-  KeyB: [b,'b','B'],
-  KeyN: [n,'n','N'],
-  KeyM: [m,'m','M'],
-  Comma: [comma,',','<'],
-  Period: [point,'.','>'],
-  Slash: [questionMark,'/','?'],
+  Backquote: [tilde, "~", "`", "ё", "Ё"],  
+  Digit1: [one, '1', '!', "1", "!"],
+  Digit2: [two,'2','@', "2", "\""],
+  Digit3: [three,'3','#', "3", "№"],
+  Digit4: [four,'4',"$", "4", ";"],
+  Digit5: [five,'5','%', "5", "%"],
+  Digit6: [six,'6','^', "6", ":"],
+  Digit7: [seven,'7','&', "7", "?"],
+  Digit8: [eight,'8','*', "8", "*"],
+  Digit9: [nine,'9','(', "9", "("],
+  Digit0: [zero,'0',')', "0", ")"],
+  Minus: [minus,'-','_', "-", "_"],
+  Equal: [equal,'=','+', "=", "+"],  
+  KeyQ: [q,'q','Q', "й", "Й"],
+  KeyW: [w,'w','W', "ц", "Ц"],
+  KeyE: [e,'e','E', "у", "У"],
+  KeyR: [r,'r','R', "к", "К"],
+  KeyT: [t,'t','T', "е", "Е"],
+  KeyY: [y,'y','Y', "н", "Н"],
+  KeyU: [u,'u','U', "г", "Г"],
+  KeyI: [i,'i','I', "ш", "Ш"],
+  KeyO: [o,'o','O', "щ", "Щ"],
+  KeyP: [p,'p','P', "з", "З"],
+  BracketLeft:[ha,'[','{', "х", "Х"],
+  BracketRight: [strongSign,']','}', "ъ", "Ъ"],
+  Backslash: [slash,'\\','|', "\\", "/"],  
+  KeyA: [a,'a','A', "ф", "Ф"],
+  KeyS: [s,'s','S', "ы", "Ы"],
+  KeyD: [d,'d','D', "в", "В"],
+  KeyF: [f,'f','F', "а", "А"],
+  KeyG: [g,'g','G', "п", "П"],
+  KeyH: [h,'h','H', "р", "Р"],
+  KeyJ: [j,'j','J', "о", "О"],
+  KeyK: [k,'k','K', "л", "Л"],
+  KeyL: [l,'l','L', "д", "Д"],
+  Semicolon: [colon,';',':', "ж", "Ж"],
+  Quote: [quotationMarks,"'",'"', "э", "Э"], 
+  KeyZ: [z,'z','Z', "я", "Я"],
+  KeyX: [x,'x','X', "ч", "Ч"],
+  KeyC: [c,'c','C', "с", "С"],
+  KeyV: [v,'v','V', "м", "М"],
+  KeyB: [b,'b','B', "и", "И"],
+  KeyN: [n,'n','N', "т", "Т"],
+  KeyM: [m,'m','M', "ь", "Ь"],
+  Comma: [comma,',','<', "б", "Б"],
+  Period: [point,'.','>', "ю", "Ю"],
+  Slash: [questionMark,'/','?', ".", ","],
+  Space: [space,' ',' ',' ',' '],
+  Enter: [enter,'\n','\n','\n','\n'],
   Backspace: [backspace],
   Tab: [tab],
   Delete: [del],
   CapsLock: [caps],
-  Enter: [enter],
   ShiftLeft: [shift],
   ArrowUp: [arrowUp],
   ShiftRight: [rightShift],
@@ -127,48 +133,207 @@ const obj = {
   ControlLeft: [ctrl],
   MetaLeft: [win],
   AltLeft: [alt],
-  AltRight: [rightAlt],
-  Space: [space],
+  AltRight: [rightAlt],  
   ArrowLeft: [arrowLeft],
   ArrowRight: [arrowRight],
   ArrowDown: [arrowDown],
 };
 
-
-
-
-
 document.addEventListener('keydown', function(event) {
- console.log(event.code);
- console.log(event.key);
- obj[event.code][0].classList.add("active");  
- if (event.key === "Shift") {
-   shiftCase();
- }  
+  event.preventDefault(); 
+
+  obj[event.code][0].classList.add("active");
+
+  if (event.key === "Shift") {
+    capsButtonIsPress();
+  }  
+  /* if (event.key === "Enter") {
+    EnterButtonIsPress();
+  }  */  
+
+  if (event.code === "ShiftLeft") {
+    shiftCaseLeft = true;
+  }  
+
+  if (event.code === "AltLeft") {
+    altCaseLeft = true;
+  }  
+
+  if (event.key === "Tab") {
+    tabCase();
+  }
+
+  if (event.code === "Backspace") {
+    backspaceButtonIsPress();
+  } 
+
+  if (event.code === "Delete") {
+    deleteButtonIsPress();
+  } 
+
+  if (event.code === "CapsLock") {
+    if (capsLock === true) {
+      obj[event.code][0].classList.remove("active");
+    }
+    capsButtonIsPress();
+  }   
+
+  identifyKey(event.code);
+  checkLang();
+  drawKey();
 });
 
 document.addEventListener('keyup', function(event) { 
+  if (event.key === "CapsLock") return;
   obj[event.code][0].classList.remove("active");
   if (event.key === "Shift") {
-    unShiftCase();
-  }      
+    capsButtonIsPress();
+  } 
+
+  if (event.code === "ShiftLeft") {
+    shiftCaseLeft = false;
+   }  
+  
+   if (event.code === "AltLeft") {
+    altCaseLeft = false;
+    }   
+  checkLang();
+  drawKey();
  });
 
+ /* function EnterButtonIsPress() {
+  printKeyCode();
+ } */
 
-function shiftCase () {
-  let arrVals = Object.values(obj);
-  arrVals.forEach(el => {
-    if (el[1] !== undefined) {
-      el[0].innerText = el[2];
-    }      
-  });
+ function capsButtonIsPress() {
+  if (capsLock === true) {
+    capsLock = false;
+  } else {
+    capsLock = true;
+  } 
+
+  if (shiftCase === true) {
+    shiftCase = false;
+  } else {
+    shiftCase = true;
+  } 
 }
 
-function unShiftCase () {
+ function deleteButtonIsPress() {
+  let arr = textin.value.split('');
+  let pos = textin.selectionStart;
+  arr.splice(pos, 1);
+  textin.value = arr.join('');
+  textin.selectionStart = textin.selectionEnd = pos;
+ }
+
+ function backspaceButtonIsPress() {
+  let arr = textin.value.split('');
+  let pos = textin.selectionStart;
+  if (pos === 0) return;
+  arr.splice(pos - 1, 1);
+  textin.value = arr.join('');
+  textin.selectionStart = textin.selectionEnd = pos -1;
+ }
+
+ function printKeyCode(key) {
+  let arr = textin.value.split('');
+  let pos = textin.selectionStart;
+  arr.splice(pos, 0, key);
+  textin.value = arr.join('');
+  textin.selectionStart = textin.selectionEnd = pos + 1;
+ }
+
+
+ function identifyKey(keyCode) {
+  //let arrVals = Object.values(obj);
+  //textin.value += obj[keyCode][1];
+  //console.log(obj[keyCode][1]);
+
+  if (shiftCase === false && lang === 'ENG') {
+      if (obj[keyCode][1] !== undefined) {
+        printKeyCode(obj[keyCode][1]);
+      }      
+  }
+
+  if (shiftCase === true && lang === 'ENG') {
+      if (obj[keyCode][2] !== undefined) {
+        printKeyCode(obj[keyCode][2]);
+      }      
+  }
+
+  if (shiftCase === false && lang === 'RUS') {
+      if (obj[keyCode][3] !== undefined) {
+        printKeyCode(obj[keyCode][3]);
+      }      
+  }
+
+  if (shiftCase === true && lang === 'RUS') {
+      if (obj[keyCode][4] !== undefined) {
+        printKeyCode(obj[keyCode][4]);
+      }      
+  }  
+}
+
+function tabCase() {
+  let arr = textin.value.split('');
+  let pos = textin.selectionStart;
+  arr.splice(pos, 0, "    ");
+  textin.value = arr.join('');
+  textin.selectionStart = textin.selectionEnd = pos + 4;
+}
+
+function checkLang() {
+  if (changeLangUpKeyFlag) {
+    if (altCaseLeft === false && shiftCaseLeft === false) {
+      changeLangUpKeyFlag = false;
+      changeLang();
+      drawKey();
+    }  
+  } else if (altCaseLeft === true && shiftCaseLeft === true) {
+    changeLangUpKeyFlag = true;
+  }  else return;     
+}
+
+function changeLang () {
+  if (lang === 'ENG') {
+    lang = 'RUS';
+  } else {
+    lang = 'ENG';
+  } 
+}
+
+function drawKey() {
   let arrVals = Object.values(obj);
-  arrVals.forEach(el => {
-    if (el[1] !== undefined) {
-      el[0].innerText = el[1];
-    }      
-  });
+  if (shiftCase === false && lang === 'ENG') {
+    arrVals.forEach(el => {
+      if (el[1] !== undefined) {
+        el[0].innerText = el[1];
+      }      
+    });
+  }
+
+  if (shiftCase === true && lang === 'ENG') {
+    arrVals.forEach(el => {
+      if (el[2] !== undefined) {
+        el[0].innerText = el[2];
+      }      
+    });
+  }
+
+  if (shiftCase === false && lang === 'RUS') {
+    arrVals.forEach(el => {
+      if (el[3] !== undefined) {
+        el[0].innerText = el[3];
+      }      
+    });
+  }
+
+  if (shiftCase === true && lang === 'RUS') {
+    arrVals.forEach(el => {
+      if (el[4] !== undefined) {
+        el[0].innerText = el[4];
+      }      
+    });
+  }
 }
