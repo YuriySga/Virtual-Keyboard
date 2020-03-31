@@ -14,10 +14,16 @@ body {
   max-width: 1020px;
 }
 
+.textin {
+  width: 840px;
+  height: 150px;
+}
+
 .button{
-  background-color: rgb(184, 184, 184);
-  border: 1px solid rgb(0, 0, 0);
-  border-radius: 12px;
+  background-color: rgb(148, 148, 148);
+  border: 1px solid rgb(253, 255, 248);
+  border-radius: 6px;
+  overflow: hidden;
 }
 
 .active {
@@ -25,16 +31,20 @@ body {
 }
 
 .keyboard {
+  background-color: cornsilk;
+  border: 2px solid #948080;
+  padding: 5px;
+  border-radius: 15px;
   text-align: center;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   display: grid;
   grid-gap: 4px;
   grid-template-areas:
-    "tilde one    two three four five six    seven   eight   nine zero     minus         equal         backspace  backspace"
-    "tab    q      w    e    r     t    y     u        i      o     p       ha          strongSign      slash       del"
-    "caps  caps    a    s    d     f    g     h       j       k     l     colon       quotationMarks    enter       enter"
-    "shift  shift shift  z   x    c     v     b        n        m  comma  point         questionMark  arrowUp       rightShift"
-    "ctrl  win    alt  space space space space space space   space  rightAlt rightCtrl   arrowLeft    arrowDown     arrowRight";
+    "tilde one    two three four five six    seven   eight   nine zero     minus         equal         backspace    backspace  backspace"
+    "tab    q      w    e    r     t    y     u        i      o     p       ha          strongSign      slash          del      del"
+    "caps  caps    a    s    d     f    g     h       j       k     l     colon       quotationMarks    enter       enter       enter"
+    "shift  shift shift  z   x    c     v     b        n        m  comma  point         questionMark  arrowUp       rShift    rShift"
+    "ctrl  win    alt  space space space space space space   space  rAlt rCtrl    rCtrl  arrowLeft    arrowDown     arrowRight";
   width: 840px;
   height: 281px;
 }
@@ -287,8 +297,8 @@ body {
   display: block;
 }
 
-.rightShift {
-  grid-area: rightShift;
+.rShift {
+  grid-area: rShift;
   display: block;
 }
 
@@ -312,13 +322,13 @@ body {
   display: block;
 }
 
-.rightAlt {
-  grid-area: rightAlt;
+.rAlt {
+  grid-area: rAlt;
   display: block;
 }
 
-.rightCtrl {
-  grid-area: rightCtrl;
+.rCtrl {
+  grid-area: rCtrl;
   display: block;
 }
 
