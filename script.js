@@ -117,7 +117,7 @@ generatorButton();
 drawKey();
 
  keyboard.addEventListener('mousedown', function(event) {
-  console.log(event.target.dataset);
+  if (event.target.classList[0] === "keyboard") return;
   setStyle(event.target, true);
   identifyKey(event.target.dataset, "down");
   drawKey();
@@ -194,10 +194,6 @@ document.addEventListener('keyup', function(event) {
 
 
  function identifyKey(event, updown) {
-  console.log('event.code');
-   console.log(event.code);
-   console.log(event.key);
-
   if (event.code === "ShiftLeft") {
     if (shiftCaseLeft) shiftCaseLeft = false;
     else shiftCaseLeft = true;
@@ -234,7 +230,6 @@ document.addEventListener('keyup', function(event) {
     } 
 
     if (shiftCase === false && localStorage.lang === 'ENG') {   
-      console.log(obj[event.code]);
         if (obj[event.code][1] !== undefined) {
           printKeyCode(obj[event.code][1]);
         }      
