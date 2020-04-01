@@ -68,6 +68,7 @@ const obj = {
   AltRight: ['rAlt'],   
 };
 
+let MousLastPressButton = '';
 if (localStorage.lang === undefined) localStorage.lang = 'ENG';
 let shiftCase = false;
 let shiftCaseLeft = false;
@@ -98,37 +99,27 @@ class Button {
   }
 }
 
-function generatorButton () {
-  let ar = [];
-  let arr = Object.keys(obj);
-  arr.forEach(el => {
-     ar.push(new Button({
-      code: el,
-      key: obj[el][0],
-      style: obj[el][0],
-    })); 
-  });
-   ar.forEach(el => {
-    keyboard.append(el.generateButton());
-  }) ; 
-}
-
 generatorButton();
 drawKey();
+textin.focus();
 
- keyboard.addEventListener('mousedown', function(event) {
+
+keyboard.addEventListener('mousedown', function(event) {
+  textin.focus();
   if (event.target.classList[0] === "keyboard") return;
+  MousLastPressButton = event.target;
   setStyle(event.target, true);
   identifyKey(event.target.dataset, "down");
   drawKey();
- });
+});
 
- keyboard.addEventListener('mouseup', function(event) {
+keyboard.addEventListener('mouseup', function(event) {
+  textin.focus();
   if (event.target.dataset.code === "CapsLock") return;
-  setStyle(event.target, false);
+  removeLastPressButtonStyle();
   identifyKey(event.target.dataset, "up");
   drawKey();
- });
+});
 
 document.addEventListener('keydown', function(event) {
   if (event.repeat) return;
@@ -148,12 +139,16 @@ document.addEventListener('keyup', function(event) {
   drawKey();
  });
 
- function setStyle (code, bool) {
+function setStyle (code, bool) {
   if (bool) code.classList.add("active");
   else code.classList.remove("active");
 }
 
- function capsButtonIsPress() {
+function removeLastPressButtonStyle () {
+  MousLastPressButton.classList.remove("active");
+}
+
+function capsButtonIsPress() {
   if (capsLock === true) {
     capsLock = false;
   } else {
@@ -167,33 +162,33 @@ document.addEventListener('keyup', function(event) {
   } 
 }
 
- function deleteButtonIsPress() {
+function deleteButtonIsPress() {
   let arr = textin.value.split('');
   let pos = textin.selectionStart;
   arr.splice(pos, 1);
   textin.value = arr.join('');
   textin.selectionStart = textin.selectionEnd = pos;
- }
+}
 
- function backspaceButtonIsPress() {
+function backspaceButtonIsPress() {
   let arr = textin.value.split('');
   let pos = textin.selectionStart;
   if (pos === 0) return;
   arr.splice(pos - 1, 1);
   textin.value = arr.join('');
   textin.selectionStart = textin.selectionEnd = pos -1;
- }
+}
 
- function printKeyCode(key) {
+function printKeyCode(key) {
   let arr = textin.value.split('');
   let pos = textin.selectionStart;
   arr.splice(pos, 0, key);
   textin.value = arr.join('');
   textin.selectionStart = textin.selectionEnd = pos + 1;
- }
+}
 
 
- function identifyKey(event, updown) {
+function identifyKey(event, updown) {
   if (event.code === "ShiftLeft") {
     if (shiftCaseLeft) shiftCaseLeft = false;
     else shiftCaseLeft = true;
@@ -348,10 +343,25 @@ function createKeyboard() {
 
 function createTextarea() {
   let textarea = document.createElement('textarea');
-  textarea.className = "textin"; 
+  textarea.className = "textin";
+  textarea.value = "Клавиатура создавалась в OS Windows";
   document.body.append(textarea);
 }
 
+function generatorButton () {
+  let ar = [];
+  let arr = Object.keys(obj);
+  arr.forEach(el => {
+     ar.push(new Button({
+      code: el,
+      key: obj[el][0],
+      style: obj[el][0],
+    })); 
+  });
+   ar.forEach(el => {
+    keyboard.append(el.generateButton());
+  }) ; 
+}
 
 
 
