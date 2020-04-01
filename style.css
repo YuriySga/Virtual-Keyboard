@@ -20,14 +20,18 @@ body {
 }
 
 .button{
+  user-select: none;
   background-color: rgb(148, 148, 148);
   border: 1px solid rgb(253, 255, 248);
   border-radius: 6px;
   overflow: hidden;
+  transition: ease border-radius 0.5s;
 }
 
 .active {
-  background-color: rgb(144, 228, 189);
+  background-color: rgb(255, 115, 0);
+  border-radius: 25px;
+  transition: ease background-color 0.2s;
 }
 
 .keyboard {
